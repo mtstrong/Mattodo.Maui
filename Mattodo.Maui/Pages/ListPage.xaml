@@ -19,7 +19,7 @@
     <ContentPage.Content>
         <VerticalStackLayout Spacing="0">
             <SearchBar
-                Placeholder="search titles"
+                Placeholder="Search Tasks"
                 TextColor="{AppThemeBinding Light=Black, Dark=LightGray}"
                 BackgroundColor="{AppThemeBinding Light=LightBlue, Dark=#3b4a4f}"
                 x:Name="SearchBar"
