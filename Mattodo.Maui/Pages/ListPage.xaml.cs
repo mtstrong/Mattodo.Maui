@@ -30,7 +30,7 @@ public partial class ListPage : BaseContentPage<ListViewModel>
 		{
 			Dictionary<string, object> parameters = new()
 			{
-				{ DetailsViewModel.LibraryQueryKey, TodoTask }
+				{ DetailsViewModel.TodoTaskQueryKey, TodoTask }
 			};
 			
 			await Shell.Current.GoToAsync(AppShell.GetRoute<DetailsPage>(), parameters);

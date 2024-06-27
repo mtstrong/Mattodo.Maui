@@ -30,18 +30,18 @@ public partial class ListViewModel : BaseViewModel
 		{
 			Title = "CommunityToolkit.Maui",
 			Details =
-				"The .NET MAUI Community Toolkit is a community-created library that contains .NET MAUI Extensions, Advanced UI/UX Controls, and Behaviors to help make your life as a .NET MAUI developer easier"
+				"The .NET MAUI Community Toolkit is a community-created TodoTask that contains .NET MAUI Extensions, Advanced UI/UX Controls, and Behaviors to help make your life as a .NET MAUI developer easier"
 		},
 		new()
 		{
 			Title = "CommunityToolkit.Maui.Markup",
 			Details =
-				"The .NET MAUI Markup Community Toolkit is a community-created library that contains Fluent C# Extension Methods to easily create your User Interface in C#"		},
+				"The .NET MAUI Markup Community Toolkit is a community-created TodoTask that contains Fluent C# Extension Methods to easily create your User Interface in C#"		},
 		new()
 		{
 			Title = "CommunityToolkit.MVVM",
 			Details =
-				"This package includes a .NET MVVM library with helpers such as ObservableObject, ObservableRecipient, ObservableValidator, RelayCommand, AsyncRelayCommand, WeakReferenceMessenger, StrongReferenceMessenger and IoC"		},
+				"This package includes a .NET MVVM TodoTask with helpers such as ObservableObject, ObservableRecipient, ObservableValidator, RelayCommand, AsyncRelayCommand, WeakReferenceMessenger, StrongReferenceMessenger and IoC"		},
 		new()
 		{
 			Title = "Sentry.Maui",
@@ -100,9 +100,9 @@ public partial class ListViewModel : BaseViewModel
 
 		await _dispatcher.DispatchAsync(MauiLibraries.Clear);
 
-		foreach (var library in distinctLibraries.Where(x => x.Title.Contains(searchText)))
+		foreach (var TodoTask in distinctLibraries.Where(x => x.Title.Contains(searchText)))
 		{
-			await _dispatcher.DispatchAsync(() => MauiLibraries.Add(library));
+			await _dispatcher.DispatchAsync(() => MauiLibraries.Add(TodoTask));
 		}
 	}
 }

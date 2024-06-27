@@ -2,23 +2,23 @@ namespace Mattodo.Maui;
 
 public partial class DetailsViewModel : BaseViewModel, IQueryAttributable
 {
-	public const string LibraryQueryKey = nameof(LibraryQueryKey);
+	public const string TodoTaskQueryKey = nameof(TodoTaskQueryKey);
 	
 	[ObservableProperty]
-	string? _libraryTitle, _libraryDetails;
+	string? _TodoTaskTitle, _TodoTaskDetails;
 	
 	[ObservableProperty]
-	bool? _libraryCompleted;
+	bool? _TodoTaskCompleted;
 	
 	[RelayCommand]
 	Task BackButtonTapped() => Shell.Current.GoToAsync("..", true);
 
 	void IQueryAttributable.ApplyQueryAttributes(IDictionary<string, object> query)
 	{
-		var library = (TodoTask)query[LibraryQueryKey];
+		var TodoTask = (TodoTask)query[TodoTaskQueryKey];
 
-		LibraryTitle = library.Title;
-		LibraryCompleted = DateTime.Compare(library.Completed, library.Started) > 0;
-		LibraryDetails = library.Details;
+		TodoTaskTitle = TodoTask.Title;
+		TodoTaskCompleted = DateTime.Compare(TodoTask.Completed, TodoTask.Started) > 0;
+		TodoTaskDetails = TodoTask.Details;
 	}
 }

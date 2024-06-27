@@ -7,7 +7,7 @@
                            x:DataType="Mattodo.Maui:DetailsViewModel"
                            x:TypeArguments="Mattodo.Maui:DetailsViewModel"
                            x:Class="Mattodo.Maui.DetailsPage"
-                           Title="{Binding LibraryTitle}">
+                           Title="{Binding TodoTaskTitle}">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior TextOverride="List" />
@@ -25,7 +25,7 @@
                 VerticalOptions="Center"
                 ScaleX="3" 
                 ScaleY="3"
-                IsChecked="{Binding LibraryCompleted}" />
+                IsChecked="{Binding TodoTaskCompleted}" />
 
             <Label
                 HorizontalOptions="Center"
@@ -34,7 +34,7 @@
                 VerticalTextAlignment="Center"
                 FontAttributes="Bold"
                 FontSize="24"
-                Text="{Binding LibraryTitle}" />
+                Text="{Binding TodoTaskTitle}" />
 
             <Label
                 HorizontalOptions="Center"
@@ -43,7 +43,7 @@
                 VerticalTextAlignment="Center"
                 FontAttributes="Italic"
                 FontSize="16"
-                Text="{Binding LibraryDetails}" />
+                Text="{Binding TodoTaskDetails}" />
 
             <Button
                 Text="Back"
