@@ -54,7 +54,7 @@
                         ItemsSource="{Binding MauiLibraries, Mode=OneTime}">
                         <CollectionView.Header>
                             <Label
-                                Text=".NET MAUI Libraries"
+                                Text="Matt's Tasks"
                                 TextColor="{AppThemeBinding Light=Black, Dark=LightGray}"
                                 Padding="0,0,0,8"
                                 FontSize="32"
@@ -65,7 +65,7 @@
                         </CollectionView.Header>
                         <CollectionView.Footer>
                             <Label
-                                Text=".NET MAUI: From Zero to Hero"
+                                Text="Let's Get to Work"
                                 TextColor="{AppThemeBinding Light=#474f52, Dark=DarkGrey}"
                                 Padding="8,0,0,0"
                                 FontSize="10"

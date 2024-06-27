@@ -19,12 +19,13 @@
             HorizontalOptions="Center"
             VerticalOptions="Center"
             Padding="12">
-            <Image
+
+            <CheckBox
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                HeightRequest="250"
-                WidthRequest="250"
-                Source="{Binding LibraryImageSource}" />
+                ScaleX="3" 
+                ScaleY="3"
+                IsChecked="{Binding LibraryCompleted}" />
 
             <Label
                 HorizontalOptions="Center"
@@ -42,7 +43,7 @@
                 VerticalTextAlignment="Center"
                 FontAttributes="Italic"
                 FontSize="16"
-                Text="{Binding LibraryDescription}" />
+                Text="{Binding LibraryDetails}" />
 
             <Button
                 Text="Back"

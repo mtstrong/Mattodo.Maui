@@ -16,7 +16,7 @@ class MauiLibrariesDataTemplate : DataTemplate
 	{
 		RowDefinitions = Rows.Define(
 			(Row.Title, 22),
-			(Row.Description, 44),
+			(Row.Details, 44),
 			(Row.BottomPadding, 8)),
 
 		ColumnDefinitions = Columns.Define(
@@ -27,13 +27,12 @@ class MauiLibrariesDataTemplate : DataTemplate
 
 		Children =
 		{
-			new Image()
+			new CheckBox()
 				.Row(Row.Title).RowSpan(2)
 				.Column(Column.Icon)
 				.Center()
-				.Aspect(Aspect.AspectFit)
 				.Size(imageRadius * 2)
-				.Bind(Image.SourceProperty, static (LibraryModel model) => model.ImageSource, mode: BindingMode.OneWay),
+				.Bind(Image.SourceProperty, static (TodoTask model) => model.IsCompleted, mode: BindingMode.OneWay),
 
 			new DataTemplateLabel
 				{
@@ -41,12 +40,12 @@ class MauiLibrariesDataTemplate : DataTemplate
 				}.Row(Row.Title).Column(Column.Text)
 				.AppThemeColorBinding(Label.TextColorProperty, Color.FromArgb("#262626"), Color.FromArgb("#c9c9c9"))
 				.Font(bold: true)
-				.Bind(Label.TextProperty, static (LibraryModel model) => model.Title, mode: BindingMode.OneWay),
+				.Bind(Label.TextProperty, static (TodoTask model) => model.Title, mode: BindingMode.OneWay),
 
 			new DataTemplateLabel(12)
-				.Row(Row.Description).Column(Column.Text)
+				.Row(Row.Details).Column(Column.Text)
 				.AppThemeColorBinding(Label.TextColorProperty, Color.FromArgb("#595959"), Color.FromArgb("#b8b6b6"))
-				.Bind(Label.TextProperty, static (LibraryModel model) => model.Description, mode: BindingMode.OneWay)
+				.Bind(Label.TextProperty, static (TodoTask model) => model.Details, mode: BindingMode.OneWay)
 		}
 	};
 
@@ -59,7 +58,7 @@ class MauiLibrariesDataTemplate : DataTemplate
 	enum Row
 	{
 		Title,
-		Description,
+		Details,
 		BottomPadding
 	}
 

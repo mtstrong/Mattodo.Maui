@@ -26,11 +26,11 @@ public partial class ListPage : BaseContentPage<ListViewModel>
 
 		var collectionView = (CollectionView)sender;
 
-		if (e.CurrentSelection.FirstOrDefault() is LibraryModel libraryModel)
+		if (e.CurrentSelection.FirstOrDefault() is TodoTask TodoTask)
 		{
 			Dictionary<string, object> parameters = new()
 			{
-				{ DetailsViewModel.LibraryQueryKey, libraryModel }
+				{ DetailsViewModel.LibraryQueryKey, TodoTask }
 			};
 			
 			await Shell.Current.GoToAsync(AppShell.GetRoute<DetailsPage>(), parameters);
@@ -46,7 +46,7 @@ public partial class ListPage : BaseContentPage<ListViewModel>
 			Opened += HandlePopupOpened;
 			
 			Content = new Label()
-				.Text("Welcome")
+				.Text("Welcome Matt")
 				.TextCenter()
 				.Font(bold: true, size: 32)
 				.Center()
