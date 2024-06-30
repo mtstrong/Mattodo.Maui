@@ -51,7 +51,7 @@
                         CanReorderItems="true"
                         SelectionMode="Single"
                         SelectionChanged="HandleSelectionChanged"
-                        ItemsSource="{Binding MauiLibraries, Mode=OneTime}">
+                        ItemsSource="{Binding MauiTodoTasks, Mode=OneTime}">
                         <CollectionView.Header>
                             <Label
                                 Text="Matt's Tasks"

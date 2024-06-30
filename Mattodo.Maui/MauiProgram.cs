@@ -1,4 +1,6 @@
-﻿namespace Mattodo.Maui;
+﻿using Refit;
+
+namespace Mattodo.Maui;
 
 public static class MauiProgram
 {
@@ -15,8 +17,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		builder.Services.AddRefitClient<ITodoTasks>()
+			.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:7260"));
+
 		builder.Services.AddSingleton<App>();
 		builder.Services.AddSingleton<AppShell>();
+		builder.Services.AddSingleton<TodoTaskApiService>();
 
 		builder.Services.AddTransient<ListPage, ListViewModel>();
 		builder.Services.AddTransient<DetailsPage, DetailsViewModel>();

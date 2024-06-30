@@ -3,7 +3,9 @@ namespace Mattodo.Maui;
 public partial class ListViewModel : BaseViewModel
 {
 	readonly IDispatcher _dispatcher;
-	
+	readonly TodoTaskApiService _todoTaskApiService;
+	IReadOnlyList<TodoTask>? _cachedTasks;
+
 	[ObservableProperty]
 	bool _isSearchBarEnabled = true,
 			_isRefreshing = false;
@@ -11,59 +13,13 @@ public partial class ListViewModel : BaseViewModel
 	[ObservableProperty]
 	string _searchBarText = string.Empty;
 	
-	public ListViewModel(IDispatcher dispatcher)
+	public ListViewModel(IDispatcher dispatcher, TodoTaskApiService todoTaskApiService)
 	{
 		_dispatcher = dispatcher;
+		_todoTaskApiService = todoTaskApiService;
 	}
 	
-	public ObservableCollection<TodoTask> MauiLibraries { get; } = new(CreateLibraries());
-	
-	static List<TodoTask> CreateLibraries() => new()
-	{
-		new()
-		{
-			Title = "Microsoft.Maui",
-			Details =
-				".NET Multi-platform App UI is a framework for building native device applications spanning mobile, tablet, and desktop"
-		},
-		new()
-		{
-			Title = "CommunityToolkit.Maui",
-			Details =
-				"The .NET MAUI Community Toolkit is a community-created TodoTask that contains .NET MAUI Extensions, Advanced UI/UX Controls, and Behaviors to help make your life as a .NET MAUI developer easier"
-		},
-		new()
-		{
-			Title = "CommunityToolkit.Maui.Markup",
-			Details =
-				"The .NET MAUI Markup Community Toolkit is a community-created TodoTask that contains Fluent C# Extension Methods to easily create your User Interface in C#"		},
-		new()
-		{
-			Title = "CommunityToolkit.MVVM",
-			Details =
-				"This package includes a .NET MVVM TodoTask with helpers such as ObservableObject, ObservableRecipient, ObservableValidator, RelayCommand, AsyncRelayCommand, WeakReferenceMessenger, StrongReferenceMessenger and IoC"		},
-		new()
-		{
-			Title = "Sentry.Maui",
-			Details =
-				"Bad software is everywhere, and we're tired of it. Sentry is on a mission to help developers write better software faster, so we can get back to enjoying technology",		},
-		new()
-		{
-			Title = "Esri.ArcGISRuntime.Maui",
-			Details =
-				"Contains APIs and UI controls for building native mobile and desktop apps with the .NET Multi-platform App UI (.NET MAUI) cross-platform framework"		},
-		new()
-		{
-			Title = "Syncfusion.Maui.Core",
-			Details =
-				"This package contains .NET MAUI Avatar View, .NET MAUI Badge View, .NET MAUI Busy Indicator, .NET MAUI Effects View, and .NET MAUI Text Input Layout components for .NET MAUI application"
-		},
-		new()
-		{
-			Title = "DotNet.Meteor",
-			Details = "A VSCode extension that can run and debug .NET apps (based on Clancey VSCode.Comet)"
-		}
-	};
+	public ObservableCollection<TodoTask> MauiTodoTasks { get; } = new();
 
 	[RelayCommand]
 	async Task RefreshAction()
@@ -72,15 +28,15 @@ public partial class ListViewModel : BaseViewModel
 
 		try
 		{
-			await Task.Delay(TimeSpan.FromSeconds(2));
+			_cachedTasks ??= await _todoTaskApiService.GetTodoTasks().ConfigureAwait(false);
 
-			MauiLibraries.Add(new()
+			foreach(var task in _cachedTasks ?? Array.Empty<TodoTask>())
 			{
-				Title = "Sharpnado.Tabs",
-				Details =
-					"Pure MAUI and Xamarin.Forms Tabs, including fixed tabs, scrollable tabs, bottom tabs, badge, segmented control, custom tabs, button tabs, bendable tabs"			});
-
-			IsRefreshing = false;
+				if(!MauiTodoTasks.Any(x => x.Id == task.Id))
+				{
+					MauiTodoTasks.Add(task);
+				}
+			}
 		}
 		finally
 		{
@@ -91,18 +47,19 @@ public partial class ListViewModel : BaseViewModel
 	[RelayCommand]
 	async Task UserStoppedTyping()
 	{
-		var searchText = SearchBarText;
+		await RefreshAction();
+		/*var searchText = SearchBarText;
 
-		var existingLibraries = new List<TodoTask>(MauiLibraries);
-		var originalLibraries = CreateLibraries();
+		var existingTodoTasks = new List<TodoTask>();
+		var originalTodoTasks = _cachedTasks ?? new List<TodoTask>();
 
-		var distinctLibraries = existingLibraries.Concat(originalLibraries).DistinctBy(x => x.Title);
+		var distinctTodoTasks = existingTodoTasks.Concat(originalTodoTasks).DistinctBy(x => x.Title);
 
-		await _dispatcher.DispatchAsync(MauiLibraries.Clear);
+		await _dispatcher.DispatchAsync(MauiTodoTasks.Clear);
 
-		foreach (var TodoTask in distinctLibraries.Where(x => x.Title.Contains(searchText)))
+		foreach (var TodoTask in distinctTodoTasks.Where(x => x.Title.Contains(searchText)))
 		{
-			await _dispatcher.DispatchAsync(() => MauiLibraries.Add(TodoTask));
-		}
+			await _dispatcher.DispatchAsync(() => MauiTodoTasks.Add(TodoTask));
+		}*/
 	}
 }

@@ -17,7 +17,7 @@ public partial class ListPage : BaseContentPage<ListViewModel>
 
 		await Task.Delay(TimeSpan.FromSeconds(1));
 
-		this.ShowPopup(new WelcomePopup());
+		//this.ShowPopup(new WelcomePopup());
 	}
 
 	async void HandleSelectionChanged(object? sender, SelectionChangedEventArgs e)

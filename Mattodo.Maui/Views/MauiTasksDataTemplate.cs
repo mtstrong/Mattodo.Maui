@@ -15,8 +15,8 @@ class MauiLibrariesDataTemplate : DataTemplate
 	static Grid CreateTemplate() => new()
 	{
 		RowDefinitions = Rows.Define(
-			(Row.Title, 22),
-			(Row.Details, 44),
+			(Row.Title, 28),
+			(Row.Details, 38),
 			(Row.BottomPadding, 8)),
 
 		ColumnDefinitions = Columns.Define(
@@ -34,7 +34,7 @@ class MauiLibrariesDataTemplate : DataTemplate
 				.Size(imageRadius * 2)
 				.Bind(Image.SourceProperty, static (TodoTask model) => model.IsCompleted, mode: BindingMode.OneWay),
 
-			new DataTemplateLabel
+			new DataTemplateLabel(20)
 				{
 					Style = AppStyles.GetResource<Style>("LargeFontLabel")
 				}.Row(Row.Title).Column(Column.Text)
