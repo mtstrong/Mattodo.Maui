@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Mattodo.Maui:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                           xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                           xmlns:Mattodo.Maui="clr-namespace:Mattodo.Maui"
+                           x:DataType="Mattodo.Maui:DetailsViewModel"
+                           x:TypeArguments="Mattodo.Maui:DetailsViewModel"
+                           x:Class="Mattodo.Maui.DetailsPage"
+                           Title="{Binding TodoTaskTitle}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior TextOverride="List" />
+    </Shell.BackButtonBehavior>
+    <ContentPage.Content>
+
+        <VerticalStackLayout
+            Spacing="12"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Padding="12">
+
+            <CheckBox
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                ScaleX="3" 
+                ScaleY="3"
+                IsChecked="{Binding TodoTaskCompleted}" />
+
+            <Label
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontAttributes="Bold"
+                FontSize="24"
+                Text="{Binding TodoTaskTitle}" />
+
+            <Label
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HorizontalTextAlignment="Center"
+                VerticalTextAlignment="Center"
+                FontAttributes="Italic"
+                FontSize="16"
+                Text="{Binding TodoTaskDetails}" />
+
+            <Button
+                Text="Back"
+                Command="{Binding BackButtonTappedCommand, Mode=OneTime}" />
+        </VerticalStackLayout>
+
+    </ContentPage.Content>
+</Mattodo.Maui:BaseContentPage>
