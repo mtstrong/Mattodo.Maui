@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Refit;
 
 namespace Mattodo.Maui;
 
@@ -9,15 +9,23 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseMauiCommunityToolkit()
+			.UseMauiCommunityToolkitMarkup()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-#if DEBUG
-		builder.Logging.AddDebug();
-#endif
+		builder.Services.AddRefitClient<ITodoTasks>()
+			.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:7260"));
+
+		builder.Services.AddSingleton<App>();
+		builder.Services.AddSingleton<AppShell>();
+		builder.Services.AddSingleton<TodoTaskApiService>();
+
+		builder.Services.AddTransient<ListPage, ListViewModel>();
+		builder.Services.AddTransient<DetailsPage, DetailsViewModel>();
 
 		return builder.Build();
 	}
