@@ -18,7 +18,7 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddRefitClient<ITodoTasks>()
-			.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://localhost:7260"));
+			.ConfigureHttpClient(client => client.BaseAddress = new Uri("https://mattodo.tehmatt.com"));
 
 		builder.Services.AddSingleton<App>();
 		builder.Services.AddSingleton<AppShell>();
